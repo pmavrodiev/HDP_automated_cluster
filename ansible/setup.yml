@@ -1,0 +1,59 @@
+---
+
+- name: Configure base system
+  hosts: all
+  remote_user: "{{first_user}}"
+  roles:
+    - configure-base-system
+  tags: [configure_base_system]
+
+
+- name: Disable SELinux and configure ntp
+  hosts: all
+  remote_user: "{{first_user}}"
+  roles:
+    - enable-ntp
+    - disable-selinux-iptables
+  tags: [no_selinux]
+
+
+
+### REBOOT only once, then comment out
+#- name: Reboot
+#  hosts: all
+#  remote_user: "{{first_user}}"
+#  roles:
+#    - reboot
+#  tags: [reboot]
+
+
+- name: Set-up Ambari repository
+  hosts: all
+  remote_user: "{{first_user}}"
+  roles:
+    - setup-ambari-repo
+  tags: [setup_ambari_repo]
+
+
+# At this point, set-up the Ambari-server manually on local.master.com.
+# Configure it to run as user ambari
+# Also keep in mind this from the docs:
+## If Ambari Server is running as a non-root user, such as 'ambari',
+## and you are planning on using Ambari Views, the following properties
+## in Services > HDFS > Configs > Advanced core-site must be added:
+## hadoop.proxyuser.ambari.groups=*
+## hadoop.proxyuser.ambari.hosts=*
+
+- name: Start Ambari server
+  hosts: master
+  remote_user: "{{first_user}}"
+  roles:
+    - start-ambari-server
+  tags: [start_ambari_server]
+
+- name: Download and install Apache Nifi
+  hosts: all
+  remote_user: "{{first_user}}"
+  roles:
+    - install-nifi
+  tags: [install_nifi]

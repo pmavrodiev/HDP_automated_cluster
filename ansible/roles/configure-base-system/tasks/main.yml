@@ -1,0 +1,23 @@
+    - name: Update cache
+      become: yes
+      yum:
+        name=*
+        update_cache=yes
+
+
+    - name: Install base packages
+      become: yes
+      yum:
+        name={{ item }}
+        state=latest
+      with_items:
+        - rpm
+        - wget
+        - net-tools
+        - yum-utils
+        - unzip
+        - createrepo
+        - ntp
+        - libselinux-python
+
+# TODO finish configuration, e.g. nprocs, swappiness, etc.

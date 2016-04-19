@@ -1,0 +1,12 @@
+    - name: Disable SElinux
+      become: yes
+      selinux:
+        state=disabled
+
+
+    - name: Disable iptables
+      become: yes
+      service:
+        name=firewalld
+        state=stopped
+

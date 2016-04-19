@@ -1,0 +1,25 @@
+    - name: Download Ambari repository
+      become: yes
+      get_url:
+        url=http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.1.0/ambari.repo
+        dest=/etc/yum.repos.d/ambari.repo
+
+    - name: Update cache
+      become: yes
+      yum:
+        name=*
+        update_cache=yes
+
+
+    - name: Install the Ambari server
+      become: yes
+      yum:
+        name: ambari-server
+        state: present
+
+
+
+
+
+
+

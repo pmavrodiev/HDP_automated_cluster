@@ -1,0 +1,6 @@
+    - name: Starting ambari server
+      become: yes
+      service:
+        name=ambari-server
+        state=started
+
