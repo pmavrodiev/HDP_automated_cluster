@@ -34,7 +34,6 @@
     - setup-ambari-repo
   tags: [setup_ambari_repo]
 
-
 # At this point, set-up the Ambari-server manually on local.master.com.
 # Configure it to run as user ambari
 # Also keep in mind this from the docs:
@@ -50,6 +49,8 @@
   roles:
     - start-ambari-server
   tags: [start_ambari_server]
+
+
 
 - name: Download and install Apache Nifi
   hosts: all

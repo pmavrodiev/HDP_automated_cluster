@@ -1,7 +1,7 @@
     - name: Download Apache Nifi
       become: yes
       get_url:
-        url=http://public-repo-1.hortonworks.com/HDF/centos7/1.x/updates/1.2.0.0/ HDF-1.2.0.0-91.tar.gz
+        url=http://public-repo-1.hortonworks.com/HDF/centos7/1.x/updates/1.2.0.0/HDF-1.2.0.0-91.tar.gz
         dest=/home/vagrant
 
 
